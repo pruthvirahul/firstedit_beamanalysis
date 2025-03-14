@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beam Analysis - Shear Force & Bending Moment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+<div class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold text-center mb-8 text-blue-600">Beam Analysis - Shear Force & Bending Moment</h1>
+
+    <form method="POST" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <div class="grid grid-cols-2 gap-4">
+            <input type="text" name="L" placeholder="Beam Length (m)" class="p-3 rounded-md border border-gray-300" required>
+            <input type="text" name="W1" placeholder="Load W1 (kN)" class="p-3 rounded-md border border-gray-300" required>
+            <input type="text" name="W2" placeholder="Load W2 (kN)" class="p-3 rounded-md border border-gray-300" required>
+            <input type="text" name="x" placeholder="Distance between W1 & W2 (m)" class="p-3 rounded-md border border-gray-300" required>
+        </div>
+        <button type="submit" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg w-full">Analyze Beam</button>
+    </form>
+
+    {% if plot_url %}
+    <div class="chart-container text-center">
+        <h2 class="text-2xl font-semibold mb-4">Shear Force & Bending Moment Diagram</h2>
+        <img src="data:image/png;base64,{{ plot_url }}" class="mx-auto rounded-lg shadow-md">
+        <a href="/download" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg">Download Graph</a>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
