@@ -1,5 +1,0 @@
-Flask
-matplotlib
-numpy
-fpdf
-gunicorn
