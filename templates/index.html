@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beam Analysis Tool</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Beam Analysis Tool</h1>
+        <form method="post" class="mb-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Length of Beam (L in m):</label>
+                    <input type="number" name="L" class="form-control" step="0.01" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Load W1 (kN):</label>
+                    <input type="number" name="W1" class="form-control" step="0.01" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Load W2 (kN):</label>
+                    <input type="number" name="W2" class="form-control" step="0.01" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Distance between W1 and W2 (x in m):</label>
+                    <input type="number" name="x" class="form-control" step="0.01" required>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Analyze Beam</button>
+            </div>
+        </form>
+
+        {% if plot_url %}
+        <div class="text-center">
+            <h3>Shear Force and Bending Moment Diagram</h3>
+            <img src="data:image/png;base64,{{ plot_url }}" class="img-fluid" alt="Shear Force and Bending Moment Diagram">
+        </div>
+        
+        <h4 class="mt-5">Results:</h4>
+        <ul>
+            <li>Maximum Reaction at A: {{ results['Ra'] }} kN</li>
+            <li>Maximum Reaction at B: {{ results['Rb'] }} kN</li>
+            <li>Bending Moment BM_01: {{ results['BM_01'] }} kN.m</li>
+            <li>Shear Force SF_01: {{ results['SF_01'] }} kN</li>
+            <li>Maximum Shear Force SF_max: {{ results['SF_max'] }} kN</li>
+            <li>Maximum Bending Moment BM_max: {{ results['BM_max'] }} kN.m</li>
+        </ul>
+
+        <div class="text-center mt-4">
+            <a href="/download" class="btn btn-success">Download Results as PDF</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
